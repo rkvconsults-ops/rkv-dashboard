@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RKV Mission Control</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="theme-color" content="#0a1c2b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="RKV Mission Control">
+<style>
+:root{
+  --t1:#f4f9fc; --t2:rgba(236,246,252,.66); --t3:rgba(236,246,252,.40);
+  --acc:#f2d264; --blu:#63b7f0; --grn:#63d9a4; --red:#f58a80;
+  --gl:rgba(255,255,255,.055); --gl2:rgba(255,255,255,.095);
+  --br:rgba(255,255,255,.115);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;color:var(--t1);
+  font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  background:
+    radial-gradient(1150px 760px at 14% -6%, rgba(132,201,235,.42), transparent 60%),
+    radial-gradient(980px 660px at 86% 6%,   rgba(64,140,196,.44), transparent 64%),
+    radial-gradient(860px 600px at 72% 104%, rgba(38,102,158,.38), transparent 60%),
+    linear-gradient(158deg,#0a1c2b 0%,#11304a 48%,#0a1e2e 100%);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+.shell{max-width:980px;margin:0 auto;padding:28px 22px 60px}
+.sheet{border-radius:26px;padding:24px 26px 28px;
+  background:linear-gradient(152deg,rgba(255,255,255,.105),rgba(255,255,255,.045));
+  backdrop-filter:blur(34px) saturate(155%);-webkit-backdrop-filter:blur(34px) saturate(155%);
+  border:1px solid var(--br);
+  box-shadow:0 26px 64px rgba(0,0,0,.40),inset 0 1px 0 rgba(255,255,255,.17)}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;gap:14px;flex-wrap:wrap}
+.top h1{margin:0;font-size:22px;font-weight:650;letter-spacing:-.4px}
+.top .meta{color:var(--t3);font-size:11.5px;margin-top:4px}
+.note{font-size:11px;color:var(--t3);max-width:340px;text-align:right;line-height:1.5}
+
+.bays{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+@media(max-width:640px){.bays{grid-template-columns:1fr}}
+.bay{background:var(--gl);border:1px solid rgba(255,255,255,.085);border-radius:19px;
+  padding:17px 19px;position:relative;overflow:hidden}
+.bay .bh{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.bay h3{margin:0;font-size:15px;font-weight:620;letter-spacing:-.2px}
+.bay .loop{font-size:10.5px;color:var(--t3);text-transform:uppercase;letter-spacing:.4px}
+.bay .what{font-size:12px;color:var(--t2);margin:6px 0 14px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--t3);flex:none}
+.dot.on{background:var(--grn);box-shadow:0 0 0 3px rgba(99,217,164,.22)}
+.dot.on::after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;
+  background:var(--grn);animation:pulse 1.8s ease-out infinite}
+@keyframes pulse{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}
+.stage-row{display:flex;gap:6px;margin-bottom:10px}
+.stage{flex:1;text-align:center;padding:8px 4px;border-radius:10px;background:rgba(255,255,255,.05)}
+.stage b{display:block;font-size:17px;font-weight:650}
+.stage span{font-size:9.5px;color:var(--t3);text-transform:uppercase;letter-spacing:.3px}
+.stage.needs b{color:var(--red)}
+.stage.ready b{color:var(--blu)}
+.stage.hold b{color:var(--acc)}
+.stage.done b{color:var(--grn)}
+.commitline{font-size:11px;color:var(--t3);display:flex;justify-content:space-between}
+
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:16px}
+@media(max-width:640px){.tiles{grid-template-columns:1fr 1fr}}
+.tile{background:var(--gl);border:1px solid rgba(255,255,255,.085);border-radius:17px;
+  padding:14px 12px;text-align:center}
+.tile b{font-size:23px;font-weight:650;display:block;line-height:1.15}
+.tile span{font-size:10.5px;color:var(--t3)}
+
+.pane{background:var(--gl);border:1px solid rgba(255,255,255,.085);border-radius:19px;
+  padding:17px 19px;margin-bottom:14px}
+.ph{font-size:13px;font-weight:620;margin-bottom:12px;color:var(--t2)}
+.bars{display:flex;gap:9px;align-items:flex-end;height:110px}
+.bcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.track{width:100%;max-width:26px;height:78px;background:rgba(255,255,255,.075);
+  border-radius:999px;display:flex;flex-direction:column;justify-content:flex-end;
+  overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+.seg{width:100%}
+.seg.build{background:rgba(255,255,255,.42)}
+.seg.sell{background:var(--acc)}
+.track.on{box-shadow:0 0 0 2px rgba(242,210,100,.30)}
+.blab{font-size:10.5px;color:var(--t3)}
+.blab.on{color:var(--t1);font-weight:600}
+.legend{display:flex;gap:14px;margin-top:12px;font-size:10.5px;color:var(--t3)}
+.legend i{width:8px;height:8px;border-radius:3px;display:inline-block;margin-right:5px}
+
+.foot{font-size:11px;color:var(--t3);text-align:center;margin-top:6px}
+.foot a{color:var(--t2)}
+
+/* ---- background photo + colour-adaptive theming, opt-in ---- */
+.bg-photo{position:fixed;inset:0;z-index:-2;background-size:cover;background-position:center;
+  display:none}
+.bg-photo.on{display:block}
+.bg-overlay{position:fixed;inset:0;z-index:-1;pointer-events:none;display:none;
+  background:linear-gradient(158deg,var(--tint1,rgba(10,28,43,.88)) 0%,
+    var(--tint2,rgba(17,48,74,.72)) 48%,var(--tint3,rgba(10,30,46,.88)) 100%)}
+.bg-overlay.on{display:block}
+.bgbtn{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.08);color:var(--t2);cursor:pointer;display:grid;place-items:center;
+  transition:.16s;flex:none}
+.bgbtn:hover{background:rgba(255,255,255,.16);color:var(--t1)}
+.bgbtn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round}
+.bgpop{position:fixed;top:66px;right:16px;width:min(220px,calc(100vw - 32px));
+  background:rgba(8,20,30,.96);border:1px solid var(--br);border-radius:16px;padding:12px;
+  z-index:90;display:none;box-shadow:0 18px 44px rgba(0,0,0,.4)}
+.bgpop.on{display:block}
+.bgpop-h{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:9px}
+.bgopt{width:100%;text-align:left;background:rgba(255,255,255,.07);border:1px solid var(--br);
+  color:var(--t1);font-size:12.5px;padding:8px 10px;border-radius:10px;cursor:pointer;margin-bottom:7px}
+.bgopt:hover{background:rgba(255,255,255,.13)}
+.bgswatches{display:flex;gap:7px;margin-bottom:9px}
+.bgswatch{width:32px;height:32px;border-radius:9px;border:1.5px solid rgba(255,255,255,.22);
+  cursor:pointer;padding:0}
+.bgswatch:hover{border-color:#fff}
+.bgreset{color:var(--t2)}
+</style></head>
+<body>
+<div class="bg-photo" id="bgPhoto"></div>
+<div class="bg-overlay" id="bgOverlay"></div>
+<div class="shell"><div class="sheet">
+  <div class="top">
+    <div>
+      <h1>RKV Mission Control</h1>
+      <div class="meta" id="meta">loading…</div>
+    </div>
+    <div class="note">Live activity and counts only — never names, emails or
+      application detail. Full detail stays on the private local dashboard.</div>
+    <div style="position:relative">
+      <button class="bgbtn" id="bgBtn" title="Background" type="button">
+        <svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><circle cx="9" cy="10" r="1.6"/><path d="M4 16l5-5 4 4 3-3 4 4"/></svg>
+      </button>
+      <div class="bgpop" id="bgPop">
+        <div class="bgpop-h">Background</div>
+        <button class="bgopt" id="bgUpload" type="button">Upload a photo&hellip;</button>
+        <input type="file" id="bgFile" accept="image/*" style="display:none">
+        <div class="bgswatches">
+          <button class="bgswatch" data-c="70,110,140" style="background:linear-gradient(135deg,#4a7a96,#1f3a4f)" title="Slate" type="button"></button>
+          <button class="bgswatch" data-c="90,120,70" style="background:linear-gradient(135deg,#6f9a56,#2c3f22)" title="Moss" type="button"></button>
+          <button class="bgswatch" data-c="150,110,70" style="background:linear-gradient(135deg,#a3774a,#432f1e)" title="Clay" type="button"></button>
+        </div>
+        <button class="bgopt bgreset" id="bgReset" type="button">Remove background</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tiles" id="tiles"></div>
+  <div class="bays" id="bays"></div>
+
+  <div class="pane">
+    <div class="ph">This week — build vs. sell</div>
+    <div class="bars" id="bars"></div>
+    <div class="legend">
+      <span><i style="background:rgba(255,255,255,.42)"></i>build (commits, posts)</span>
+      <span><i style="background:var(--acc)"></i>sell (client touches)</span>
+    </div>
+  </div>
+
+  <div class="foot">Regenerates on a schedule · source is
+    <a href="https://github.com/" target="_blank" rel="noopener">the public repo</a></div>
+</div></div>
+
+<script>
+(function bgTheme(){
+  const KEY = 'rkv-bg-photo', COLKEY = 'rkv-bg-color';
+  const photoEl = document.getElementById('bgPhoto');
+  const overlayEl = document.getElementById('bgOverlay');
+  const btn = document.getElementById('bgBtn');
+  const pop = document.getElementById('bgPop');
+  const fileInput = document.getElementById('bgFile');
+
+  function tintFromRGB(r, g, b){
+    const d = (v, f) => Math.round(v * f);
+    document.documentElement.style.setProperty('--tint1', `rgba(${d(r,.5)},${d(g,.55)},${d(b,.6)},.86)`);
+    document.documentElement.style.setProperty('--tint2', `rgba(${d(r,.7)},${d(g,.75)},${d(b,.8)},.68)`);
+    document.documentElement.style.setProperty('--tint3', `rgba(${d(r,.55)},${d(g,.58)},${d(b,.62)},.86)`);
+    const br = v => Math.min(255, Math.round(v * 1.35 + 40));
+    document.documentElement.style.setProperty('--acc', `rgb(${br(r)},${br(g)},${br(b)})`);
+  }
+
+  function applyPhoto(dataUrl, rgb){
+    photoEl.style.backgroundImage = `url(${dataUrl})`;
+    photoEl.classList.add('on');
+    overlayEl.classList.add('on');
+    if (rgb) tintFromRGB(rgb[0], rgb[1], rgb[2]);
+  }
+
+  function clearPhoto(){
+    photoEl.classList.remove('on');
+    overlayEl.classList.remove('on');
+    document.documentElement.style.removeProperty('--tint1');
+    document.documentElement.style.removeProperty('--tint2');
+    document.documentElement.style.removeProperty('--tint3');
+    document.documentElement.style.removeProperty('--acc');
+    localStorage.removeItem(KEY);
+    localStorage.removeItem(COLKEY);
+  }
+
+  function extractAndApply(dataUrl){
+    const img = new Image();
+    img.onload = () => {
+      const size = 40;
+      const c = document.createElement('canvas');
+      c.width = size; c.height = size;
+      const ctx = c.getContext('2d');
+      ctx.drawImage(img, 0, 0, size, size);
+      let r = 0, g = 0, b = 0, n = 0;
+      try {
+        const data = ctx.getImageData(0, 0, size, size).data;
+        for (let i = 0; i < data.length; i += 4) { r += data[i]; g += data[i+1]; b += data[i+2]; n++; }
+        r = Math.round(r / n); g = Math.round(g / n); b = Math.round(b / n);
+      } catch (e) { r = 90; g = 110; b = 130; }
+      applyPhoto(dataUrl, [r, g, b]);
+      try { localStorage.setItem(COLKEY, JSON.stringify([r, g, b])); } catch (e) {}
+    };
+    img.src = dataUrl;
+  }
+
+  function resizeAndStore(file){
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const maxW = 1600;
+        const scale = Math.min(1, maxW / img.width);
+        const c = document.createElement('canvas');
+        c.width = img.width * scale; c.height = img.height * scale;
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        const dataUrl = c.toDataURL('image/jpeg', 0.82);
+        try { localStorage.setItem(KEY, dataUrl); } catch (e) {}
+        extractAndApply(dataUrl);
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  btn.addEventListener('click', (e) => { e.stopPropagation(); pop.classList.toggle('on'); });
+  document.addEventListener('click', (e) => { if (!pop.contains(e.target) && e.target !== btn) pop.classList.remove('on'); });
+  document.getElementById('bgUpload').addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', (e) => { if (e.target.files[0]) resizeAndStore(e.target.files[0]); });
+  document.getElementById('bgReset').addEventListener('click', clearPhoto);
+  document.querySelectorAll('.bgswatch').forEach(sw => {
+    sw.addEventListener('click', () => {
+      const [r, g, b] = sw.dataset.c.split(',').map(Number);
+      localStorage.removeItem(KEY);
+      photoEl.classList.remove('on');
+      overlayEl.classList.add('on');
+      tintFromRGB(r, g, b);
+      try { localStorage.setItem(COLKEY, JSON.stringify([r, g, b])); } catch (e) {}
+    });
+  });
+
+  try {
+    const saved = localStorage.getItem(KEY);
+    const savedCol = localStorage.getItem(COLKEY);
+    if (saved) {
+      applyPhoto(saved, savedCol ? JSON.parse(savedCol) : null);
+    } else if (savedCol) {
+      overlayEl.classList.add('on');
+      const [r, g, b] = JSON.parse(savedCol);
+      tintFromRGB(r, g, b);
+    }
+  } catch (e) {}
+})();
+
+function animateNum(el, target){
+  const start = 0, dur = 700, t0 = performance.now();
+  function step(t){
+    const p = Math.min(1, (t - t0) / dur);
+    el.textContent = Math.round(start + (target - start) * (1 - Math.pow(1 - p, 3)));
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function agoLabel(mins){
+  if (mins == null) return "no activity yet";
+  if (mins < 60) return mins + "m ago";
+  if (mins < 60*24) return Math.round(mins/60) + "h ago";
+  return Math.round(mins/60/24) + "d ago";
+}
+
+let lastGenerated = null;
+
+function render(d){
+  const freshNote = (lastGenerated && lastGenerated !== d.generated) ? ' · updated just now' : '';
+  document.getElementById('meta').textContent =
+    'Generated ' + new Date(d.generated).toLocaleString() +
+    ' · ' + d.metrics.commits_total + ' commits total' + freshNote;
+  lastGenerated = d.generated;
+
+  const tiles = [
+    {v: d.metrics.prospects, l: 'prospects'},
+    {v: d.metrics.applications, l: 'applications'},
+    {v: d.metrics.posts_published, l: 'posts published'},
+    {v: d.metrics.claims_verified, l: 'claims verified'},
+  ];
+  const tw = document.getElementById('tiles');
+  tw.innerHTML = '';
+  tiles.forEach(t => {
+    const el = document.createElement('div');
+    el.className = 'tile';
+    el.innerHTML = '<b>0</b><span>' + t.l + '</span>';
+    tw.appendChild(el);
+    animateNum(el.querySelector('b'), t.v);
+  });
+
+  const bw = document.getElementById('bays');
+  bw.innerHTML = '';
+  d.bays.forEach(b => {
+    const el = document.createElement('div');
+    el.className = 'bay';
+    el.innerHTML =
+      '<div class="bh"><h3>' + b.name + '</h3>' +
+      '<span class="dot ' + (b.active ? 'on' : '') + '"></span></div>' +
+      '<div class="loop">' + b.loop + '</div>' +
+      '<div class="what">' + b.what + '</div>' +
+      '<div class="stage-row">' +
+        '<div class="stage needs"><b>' + b.stage.needs + '</b><span>needs you</span></div>' +
+        '<div class="stage ready"><b>' + b.stage.ready + '</b><span>ready</span></div>' +
+        '<div class="stage hold"><b>' + b.stage.hold + '</b><span>on hold</span></div>' +
+        '<div class="stage done"><b>' + b.stage.done + '</b><span>done</span></div>' +
+      '</div>' +
+      '<div class="commitline"><span>' + b.commits_7d + ' commit' + (b.commits_7d === 1 ? '' : 's') + ', last 7d</span>' +
+      '<span>' + agoLabel(b.last_commit_mins_ago) + '</span></div>';
+    bw.appendChild(el);
+  });
+
+  const maxv = Math.max(1, ...d.week.map(w => w.build + w.sell));
+  const barsEl = document.getElementById('bars');
+  barsEl.innerHTML = '';
+  d.week.forEach(w => {
+    const buildH = Math.round((w.build / maxv) * 78);
+    const sellH = Math.round((w.sell / maxv) * 78);
+    const col = document.createElement('div');
+    col.className = 'bcol';
+    col.innerHTML =
+      '<div class="track' + (w.today ? ' on' : '') + '">' +
+        '<div class="seg sell" style="height:' + sellH + 'px"></div>' +
+        '<div class="seg build" style="height:' + buildH + 'px"></div>' +
+      '</div>' +
+      '<div class="blab' + (w.today ? ' on' : '') + '">' + w.label + '</div>';
+    barsEl.appendChild(col);
+  });
+}
+
+function load(){
+  return fetch('data.json?_=' + Date.now())
+    .then(r => r.json())
+    .then(render)
+    .catch(() => {
+      document.getElementById('meta').textContent = 'Could not load data.json';
+    });
+}
+
+load();
+
+// Keep it live while the page is open: recheck every 60s, and immediately
+// whenever the tab/app regains focus (covers phones, where background tabs
+// get throttled and a fixed timer alone can't be relied on).
+setInterval(() => { if (document.visibilityState === 'visible') load(); }, 60000);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') load();
+});
+</script>
+</body></html>

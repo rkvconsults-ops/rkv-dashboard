@@ -1,0 +1,142 @@
+{
+ "generated": "2026-07-30T15:13:54Z",
+ "bays": [
+  {
+   "id": "outreach",
+   "name": "Outreach",
+   "loop": "Fast Money Loop",
+   "what": "Finding and converting clients.",
+   "stage": {
+    "needs": 4,
+    "ready": 3,
+    "hold": 0,
+    "done": 3
+   },
+   "last_commit_mins_ago": 199,
+   "commits_7d": 34,
+   "active": true
+  },
+  {
+   "id": "writing",
+   "name": "Writing",
+   "loop": "Slow Reputation Loop",
+   "what": "LinkedIn, Pehchan, the book.",
+   "stage": {
+    "needs": 2,
+    "ready": 0,
+    "hold": 1,
+    "done": 2
+   },
+   "last_commit_mins_ago": 4498,
+   "commits_7d": 26,
+   "active": false
+  },
+  {
+   "id": "delivery",
+   "name": "Delivery",
+   "loop": "Paid work",
+   "what": "CFR/CRET coaching and OD engagements.",
+   "stage": {
+    "needs": 0,
+    "ready": 2,
+    "hold": 0,
+    "done": 3
+   },
+   "last_commit_mins_ago": 7363,
+   "commits_7d": 1,
+   "active": false
+  },
+  {
+   "id": "system",
+   "name": "System",
+   "loop": "Infrastructure",
+   "what": "Vault, gate, backups, truth ledgers.",
+   "stage": {
+    "needs": 0,
+    "ready": 0,
+    "hold": 0,
+    "done": 4
+   },
+   "last_commit_mins_ago": 199,
+   "commits_7d": 23,
+   "active": true
+  }
+ ],
+ "metrics": {
+  "prospects": 8,
+  "applications": 0,
+  "posts_staged": 0,
+  "posts_bank": 7,
+  "posts_published": 3,
+  "claims_verified": 11,
+  "claims_withdrawn": 11,
+  "commits_total": 124
+ },
+ "decisions": {
+  "OPEN": 4,
+  "INTERIM": 1,
+  "CLOSED": 6
+ },
+ "agent": {
+  "active": false,
+  "mins_ago": null
+ },
+ "week": [
+  {
+   "label": "Mon",
+   "date": "2026-07-27",
+   "sell": 0,
+   "build": 25,
+   "today": false,
+   "past": true
+  },
+  {
+   "label": "Tue",
+   "date": "2026-07-28",
+   "sell": 0,
+   "build": 1,
+   "today": false,
+   "past": true
+  },
+  {
+   "label": "Wed",
+   "date": "2026-07-29",
+   "sell": 0,
+   "build": 1,
+   "today": false,
+   "past": true
+  },
+  {
+   "label": "Thu",
+   "date": "2026-07-30",
+   "sell": 0,
+   "build": 7,
+   "today": true,
+   "past": false
+  },
+  {
+   "label": "Fri",
+   "date": "2026-07-31",
+   "sell": 0,
+   "build": 0,
+   "today": false,
+   "past": false
+  },
+  {
+   "label": "Sat",
+   "date": "2026-08-01",
+   "sell": 0,
+   "build": 1,
+   "today": false,
+   "past": false
+  },
+  {
+   "label": "Sun",
+   "date": "2026-08-02",
+   "sell": 0,
+   "build": 0,
+   "today": false,
+   "past": false
+  }
+ ]
+}
