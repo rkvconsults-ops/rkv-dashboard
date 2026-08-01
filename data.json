@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-01T09:25:46Z",
+ "generated": "2026-08-01T13:02:13Z",
  "bays": [
   {
    "id": "outreach",
@@ -12,8 +12,8 @@
     "hold": 0,
     "done": 3
    },
-   "last_commit_mins_ago": 93,
-   "commits_7d": 40,
+   "last_commit_mins_ago": 309,
+   "commits_7d": 39,
    "active": true
   },
   {
@@ -22,13 +22,13 @@
    "loop": "Slow Reputation Loop",
    "what": "LinkedIn, Pehchan, the book.",
    "stage": {
-    "needs": 3,
+    "needs": 2,
     "ready": 0,
     "hold": 1,
     "done": 2
    },
-   "last_commit_mins_ago": 68,
-   "commits_7d": 30,
+   "last_commit_mins_ago": 5,
+   "commits_7d": 31,
    "active": true
   },
   {
@@ -42,8 +42,8 @@
     "hold": 0,
     "done": 3
    },
-   "last_commit_mins_ago": 216,
-   "commits_7d": 2,
+   "last_commit_mins_ago": 433,
+   "commits_7d": 1,
    "active": true
   },
   {
@@ -57,20 +57,20 @@
     "hold": 0,
     "done": 4
    },
-   "last_commit_mins_ago": 124,
-   "commits_7d": 30,
+   "last_commit_mins_ago": 340,
+   "commits_7d": 28,
    "active": true
   }
  ],
  "metrics": {
   "prospects": 8,
   "applications": 1,
-  "posts_staged": 0,
-  "posts_bank": 7,
+  "posts_staged": 3,
+  "posts_bank": 14,
   "posts_published": 3,
   "claims_verified": 22,
   "claims_withdrawn": 11,
-  "commits_total": 144
+  "commits_total": 146
  },
  "decisions": {
   "OPEN": 3,
@@ -79,7 +79,7 @@
  },
  "agent": {
   "active": false,
-  "mins_ago": null
+  "mins_ago": 337
  },
  "week": [
   {
@@ -126,7 +126,7 @@
    "label": "Sat",
    "date": "2026-08-01",
    "sell": 0,
-   "build": 11,
+   "build": 13,
    "today": true,
    "past": false
   },
