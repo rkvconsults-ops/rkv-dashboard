@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-06T13:28:11Z",
+ "generated": "2026-08-06T13:33:15Z",
  "bays": [
   {
    "id": "outreach",
@@ -7,12 +7,12 @@
    "loop": "Fast Money Loop",
    "what": "Finding and converting clients.",
    "stage": {
-    "needs": 4,
-    "ready": 3,
-    "hold": 0,
+    "needs": 3,
+    "ready": 2,
+    "hold": 1,
     "done": 3
    },
-   "last_commit_mins_ago": 5,
+   "last_commit_mins_ago": 10,
    "commits_7d": 13,
    "active": true
   },
@@ -27,7 +27,7 @@
     "hold": 1,
     "done": 2
    },
-   "last_commit_mins_ago": 400,
+   "last_commit_mins_ago": 405,
    "commits_7d": 16,
    "active": true
   },
@@ -42,7 +42,7 @@
     "hold": 0,
     "done": 3
    },
-   "last_commit_mins_ago": 5,
+   "last_commit_mins_ago": 10,
    "commits_7d": 2,
    "active": true
   },
@@ -57,7 +57,7 @@
     "hold": 0,
     "done": 4
    },
-   "last_commit_mins_ago": 420,
+   "last_commit_mins_ago": 425,
    "commits_7d": 13,
    "active": true
   }
