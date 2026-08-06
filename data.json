@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-06T13:33:15Z",
+ "generated": "2026-08-06T13:50:11Z",
  "bays": [
   {
    "id": "outreach",
@@ -12,7 +12,7 @@
     "hold": 1,
     "done": 3
    },
-   "last_commit_mins_ago": 10,
+   "last_commit_mins_ago": 27,
    "commits_7d": 13,
    "active": true
   },
@@ -27,7 +27,7 @@
     "hold": 1,
     "done": 2
    },
-   "last_commit_mins_ago": 405,
+   "last_commit_mins_ago": 422,
    "commits_7d": 16,
    "active": true
   },
@@ -42,7 +42,7 @@
     "hold": 0,
     "done": 3
    },
-   "last_commit_mins_ago": 10,
+   "last_commit_mins_ago": 27,
    "commits_7d": 2,
    "active": true
   },
@@ -57,7 +57,7 @@
     "hold": 0,
     "done": 4
    },
-   "last_commit_mins_ago": 425,
+   "last_commit_mins_ago": 442,
    "commits_7d": 13,
    "active": true
   }
@@ -70,7 +70,7 @@
   "posts_published": 3,
   "claims_verified": 23,
   "claims_withdrawn": 11,
-  "commits_total": 169
+  "commits_total": 170
  },
  "decisions": {
   "OPEN": 3,
@@ -110,7 +110,7 @@
    "label": "Thu",
    "date": "2026-08-06",
    "sell": 0,
-   "build": 6,
+   "build": 7,
    "today": true,
    "past": false
   },
