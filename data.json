@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-06T13:50:11Z",
+ "generated": "2026-08-06T13:50:55Z",
  "bays": [
   {
    "id": "outreach",
@@ -12,7 +12,7 @@
     "hold": 1,
     "done": 3
    },
-   "last_commit_mins_ago": 27,
+   "last_commit_mins_ago": 28,
    "commits_7d": 13,
    "active": true
   },
@@ -42,7 +42,7 @@
     "hold": 0,
     "done": 3
    },
-   "last_commit_mins_ago": 27,
+   "last_commit_mins_ago": 28,
    "commits_7d": 2,
    "active": true
   },
@@ -57,7 +57,7 @@
     "hold": 0,
     "done": 4
    },
-   "last_commit_mins_ago": 442,
+   "last_commit_mins_ago": 443,
    "commits_7d": 13,
    "active": true
   }
@@ -79,7 +79,7 @@
  },
  "agent": {
   "active": false,
-  "mins_ago": null
+  "mins_ago": 7586
  },
  "week": [
   {
