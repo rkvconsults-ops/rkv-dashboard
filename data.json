@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-01T13:02:13Z",
+ "generated": "2026-08-06T13:28:11Z",
  "bays": [
   {
    "id": "outreach",
@@ -12,8 +12,8 @@
     "hold": 0,
     "done": 3
    },
-   "last_commit_mins_ago": 309,
-   "commits_7d": 39,
+   "last_commit_mins_ago": 5,
+   "commits_7d": 13,
    "active": true
   },
   {
@@ -27,8 +27,8 @@
     "hold": 1,
     "done": 2
    },
-   "last_commit_mins_ago": 5,
-   "commits_7d": 31,
+   "last_commit_mins_ago": 400,
+   "commits_7d": 16,
    "active": true
   },
   {
@@ -42,8 +42,8 @@
     "hold": 0,
     "done": 3
    },
-   "last_commit_mins_ago": 433,
-   "commits_7d": 1,
+   "last_commit_mins_ago": 5,
+   "commits_7d": 2,
    "active": true
   },
   {
@@ -57,20 +57,20 @@
     "hold": 0,
     "done": 4
    },
-   "last_commit_mins_ago": 340,
-   "commits_7d": 28,
+   "last_commit_mins_ago": 420,
+   "commits_7d": 13,
    "active": true
   }
  ],
  "metrics": {
-  "prospects": 8,
+  "prospects": 2,
   "applications": 1,
   "posts_staged": 3,
   "posts_bank": 14,
   "posts_published": 3,
-  "claims_verified": 22,
+  "claims_verified": 23,
   "claims_withdrawn": 11,
-  "commits_total": 146
+  "commits_total": 169
  },
  "decisions": {
   "OPEN": 3,
@@ -79,20 +79,20 @@
  },
  "agent": {
   "active": false,
-  "mins_ago": 337
+  "mins_ago": null
  },
  "week": [
   {
    "label": "Mon",
-   "date": "2026-07-27",
+   "date": "2026-08-03",
    "sell": 0,
-   "build": 25,
+   "build": 0,
    "today": false,
    "past": true
   },
   {
    "label": "Tue",
-   "date": "2026-07-28",
+   "date": "2026-08-04",
    "sell": 0,
    "build": 1,
    "today": false,
@@ -100,39 +100,39 @@
   },
   {
    "label": "Wed",
-   "date": "2026-07-29",
+   "date": "2026-08-05",
    "sell": 0,
-   "build": 1,
+   "build": 0,
    "today": false,
    "past": true
   },
   {
    "label": "Thu",
-   "date": "2026-07-30",
+   "date": "2026-08-06",
    "sell": 0,
-   "build": 13,
-   "today": false,
-   "past": true
-  },
-  {
-   "label": "Fri",
-   "date": "2026-07-31",
-   "sell": 0,
-   "build": 4,
-   "today": false,
-   "past": true
-  },
-  {
-   "label": "Sat",
-   "date": "2026-08-01",
-   "sell": 0,
-   "build": 13,
+   "build": 6,
    "today": true,
    "past": false
   },
   {
+   "label": "Fri",
+   "date": "2026-08-07",
+   "sell": 0,
+   "build": 0,
+   "today": false,
+   "past": false
+  },
+  {
+   "label": "Sat",
+   "date": "2026-08-08",
+   "sell": 0,
+   "build": 0,
+   "today": false,
+   "past": false
+  },
+  {
    "label": "Sun",
-   "date": "2026-08-02",
+   "date": "2026-08-09",
    "sell": 0,
    "build": 0,
    "today": false,
